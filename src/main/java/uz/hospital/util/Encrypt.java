@@ -20,31 +20,20 @@ public class Encrypt {
     private byte[] time;
 
 
-    public static Encrypt encryptPatient(Patient patient){
-        RSA rsa=new RSA();
+
+    public static Encrypt encryptPatient(Patient patient) {
+        KriptaAES k = new KriptaAES();
+        String secret_key = "secret-code-password";
         return Encrypt
                 .builder()
-                .id(
-                        rsa
-                                .encryptMessage(patient.getId().toString().getBytes()))
-                .fullname(
-                        rsa
-                                .encryptMessage(patient.getFullname().getBytes()))
-                .typeIllness(
-                        rsa
-                                .encryptMessage(patient.getTypeIllness().getBytes()))
-                .username(
-                        rsa
-                                .encryptMessage(patient.getUsername().getBytes()))
-                .password(
-                        rsa
-                                .encryptMessage(patient.getPassword().getBytes()))
-                .email(
-                        rsa.
-                                encryptMessage(patient.getEmail().getBytes()))
-                .time(
-                        rsa
-                                .encryptMessage(patient.getTime().toString().getBytes()))
+                .id(k.encrypt(patient.getId().toString(),secret_key))
+                .fullname(k.encrypt(patient.getFullname(),secret_key))
+                .typeIllness(k.encrypt(patient.getTypeIllness() , secret_key))
+                .username(k.encrypt(patient.getUsername() , secret_key))
+                .password(k.encrypt(patient.getPassword(),secret_key))
+                .email(k.encrypt(patient.getEmail() , secret_key))
+                .time(k.encrypt(patient.getTime().toString() , secret_key))
                 .build();
+
     }
 }

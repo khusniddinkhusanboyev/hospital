@@ -22,31 +22,27 @@ public class Decrypting {
     private String email;
     private LocalDateTime time;
 
+
+
+
+
     public static Patient decryptPatient(Encrypt encrypt) {
-        RSA rsa = new RSA();
+
+        KriptaAES k = new KriptaAES();
+        String secret_key = "secret-code-password";
         return Patient
                 .builder()
-                /*.id(Integer.parseInt(
-                        new String(rsa
-                                .decryptMessage(encrypt.getId().toString().getBytes()))))
-               */ .fullname(
-                        new String(rsa
-                                .decryptMessage(encrypt.getFullname().toString().getBytes())))
-                .typeIllness(new String(rsa
-                        .decryptMessage(encrypt.getTypeIllness().toString().getBytes())))
-                .username(new String(rsa
-                        .decryptMessage(encrypt.getUsername().toString().getBytes())))
-                .password(new String(
-                        rsa
-                                .decryptMessage(encrypt.getPassword().toString().getBytes())))
-                .email(new String(
-                        rsa.
-                                decryptMessage(encrypt.getEmail().toString().getBytes())))
-                /*.time(LocalDateTime.parse(new String(rsa
-                        .decryptMessage(encrypt.getTime().toString().getBytes())))
-                )*/
+                .id(Integer.parseInt(new String(k.decrypt(encrypt.getId(), secret_key))))
+                .fullname(new String(k.decrypt(encrypt.getFullname(), secret_key)))
+                .typeIllness(new String(k.decrypt(encrypt.getTypeIllness(), secret_key)))
+                .username(new String(k.decrypt(encrypt.getUsername(), secret_key)))
+                .password(new String(k.decrypt(encrypt.getPassword(), secret_key)))
+                .email(new String(k.decrypt(encrypt.getEmail(), secret_key)))
+                /*.time(LocalDateTime.parse(new String(k.decrypt(encrypt.getTime().toString(), secret_key))))*/
                 .build();
-    }
+
+        }
+
 
 
 }
