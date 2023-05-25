@@ -16,6 +16,9 @@ public class PatientService {
     public List<Patient> patients(){
         return patientRepository.findAll();
     }
+    public Optional<Patient> patientUsernameAndPassword(String username,String password){
+        return patientRepository.getPatientByUsernameAndPassword(username,password);
+    }
 
     public Optional<Patient> findPatientById(Integer id){
        return patientRepository.findById(id);

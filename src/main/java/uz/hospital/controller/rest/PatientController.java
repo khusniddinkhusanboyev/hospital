@@ -2,6 +2,7 @@ package uz.hospital.controller.rest;
 
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +23,16 @@ public class PatientController {
     private final PatientService patientService;
     RSA rsa=new RSA();
 
+    @GetMapping("/patientUserAndPassword")
+    public ResponseEntity<?> patienUserAndPassword(@RequestParam("username") String username, @RequestParam("password") String password){
+       var loginData=patientService.patientUsernameAndPassword(username,password);
+           if (!loginData.isPresent()){
+               return new ResponseEntity<>(new ResponseApi(false, "Bu shaxs tizimdan o'tmagan", null), HttpStatus.NOT_FOUND);
+           }
+           return ResponseEntity.ok(new ResponseApi(true, "patients are found" , loginData.get()));
+
+    }
+
     @GetMapping("/patients")
     public ResponseEntity<?> patients() {
         var listOfPatients = patientService.patients();
@@ -30,6 +41,7 @@ public class PatientController {
         }
         return ResponseEntity.ok(new ResponseApi(true, " patients are found " , listOfPatients));
     }
+
 
     @PostMapping("/{id}")
     public ResponseEntity<?> patient(@PathVariable Integer id) {
