@@ -19,8 +19,7 @@ public class Diagnosis {
     private Integer id;
     private String doctor;
     private String diagnosis;
-    private LocalDateTime localDateTime;
-    @OneToOne
-    @JoinColumn(name = "patient_id")
-    private Patient patient;
+    @JoinColumn(name = "patient" , table = "patient" , referencedColumnName = "id")
+    private Integer patient;
+    private LocalDateTime localDateTime=LocalDateTime.now();
 }

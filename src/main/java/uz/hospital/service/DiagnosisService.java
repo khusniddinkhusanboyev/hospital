@@ -26,4 +26,7 @@ public class DiagnosisService {
     public List<Diagnosis> diagnosisList(){
         return diagnosisRepository.findAll();
     }
+    public void remove(Integer id){
+        diagnosisRepository.deleteById(id);
+    }
 }

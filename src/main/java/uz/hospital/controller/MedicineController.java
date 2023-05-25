@@ -30,7 +30,7 @@ private final DiagnosisService diagnosisService;
                 "patients" ,
                 patientService
                         .patients());
-        model.addAttribute(
+       /* model.addAttribute(
                 "encrypts" ,
                 patientService
                         .patients()
@@ -47,7 +47,7 @@ private final DiagnosisService diagnosisService;
                         .stream()
                         .map(Decrypting::decryptPatient)
                         .toList());
-        model.addAttribute("model" , new Patient());
+      */  model.addAttribute("model" , new Patient());
         return "register";
     }
 
@@ -58,7 +58,7 @@ private final DiagnosisService diagnosisService;
     }
 
     @PostMapping("/remove/{id}")
-    public String remove(@PathVariable Integer id){
+    public String removeDiagnosis(@PathVariable Integer id){
         patientService.remove(id);
         return "redirect:/register";
     }
@@ -66,15 +66,31 @@ private final DiagnosisService diagnosisService;
     /**Diagnosis**/
     @GetMapping("/list-diagnosis")
     public String diognosisList(Model model){
-        model.addAttribute("new-diagnosis" , new Diagnosis());
+        model.addAttribute("newdiagnosis" , new Diagnosis());
+        model.addAttribute("pts" , patientService.patients() );
         model.addAttribute("diagnosis" , diagnosisService.diagnosisList());
         return "diagnosis";
     }
 
     @PostMapping("/save-diagnos")
-    public String saveDiagnosis(@ModelAttribute("new-diagnosis") Diagnosis diagnosis){
+    public String saveDiagnosis(@ModelAttribute("newdiagnosis") Diagnosis diagnosis){
+        System.err.println(diagnosis.toString());
+        diagnosisService.save(diagnosis);
         return "redirect:/list-diagnosis";
     }
+    @PostMapping("/del/{id}")
+    public String remove(@PathVariable Integer id){
+        diagnosisService.remove(id);
+        return "redirect:/list-diagnosis";
+    }
+
+    @GetMapping("/show-details/{id}")
+    public String show(@PathVariable Integer id, Model model){
+        model.addAttribute("showDetails" , diagnosisService.findById(id).get());
+        return "show-details";
+    }
+
+
 
 
 

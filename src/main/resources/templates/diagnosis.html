@@ -196,21 +196,24 @@
 
       <div class="col-lg-6">
         <div class="bg-white text-center rounded p-5">
-          <h1 class="mb-4">Book An Appointment</h1>
-          <form th:action="@{/save-diagnos}" method="get" th:object="${new-diagnosis}">
+          <h1 class="mb-4">Diagnosis</h1>
+          <form th:action="@{/save-diagnos}" method="post" th:object="${newdiagnosis}">
             <div class="row g-3">
               <div class="col-12 col-sm-6">
                 <input type="text" required class="form-control bg-light border-0"  th:field="*{doctor}" name="fullName" placeholder="Doctor's Fullname" style="height: 55px;">
               </div>
               <div class="col-12 col-sm-6">
-                <select class="form-select bg-light border-0"  th:each="d:${diagnosis}" name="typeIllness" style="height: 55px;">
-                  <option selected value="Bemor shikoyat">Patient</option>
-                  <option th:text="${d.fullname}" th:field="*{d.id}">Bemor shikoyat</option>
+                <select class="form-select bg-light border-0" th:field="*{patient}" name="typeIllness" style="height: 55px;">
+                  <!--<option selected value="Bemor shikoyat">Patient</option>
+                  --><option th:each="p : ${pts}" th:text="${p.fullname}" th:value="${p.id}" >Bemor shikoyat</option>
                 </select>
               </div>
 
-              <div class="col-12 col-sm-6">
+             <!-- <div class="col-12 col-sm-6">
                 <input required type="text" th:field="*{diagnosis}" name="email" class="form-control bg-light border-0" placeholder="Diagnosis..." style="height: 55px;">
+              </div>-->
+              <div class="col-12">
+                <textarea class="form-control bg-light border-0" th:field="*{diagnosis}" rows="5" placeholder="Diagnosis..."></textarea>
               </div>
               <!--<div class="col-12 col-sm-6">
                 &lt;!&ndash;<select class="form-select bg-light border-0" name style="height: 55px;">
@@ -251,24 +254,20 @@
         <table class="table" style="color:black">
           <thead>
           <tr>
-            <th scope="col">FullName</th>
-            <th scope="col">Type Illness</th>
-            <th scope="col">Email</th>
-            <th scope="col">UserName</th>
-            <th scope="col">Password</th>
+            <th scope="col">Doctor</th>
+            <th scope="col">Diagnosis</th>
+            <th scope="col">Patient</th>
             <th scope="col">Time</th>
           </tr>
-          </thead>
           <tbody>
-          <tr th:each="p:${patients}">
-            <td ><form th:action="@{/remove/{id}(id=${p.id})}" method="post">
-              <button class="btn btn-outline-primary" style="color:white" type="submit" alt="remove" th:text="${p.fullname}"></button>
+          </thead>
+          <tr th:each="ds:${diagnosis}">
+            <td ><form th:action="@{/del/{id}(id=${ds.id})}" method="post">
+              <button class="btn btn-outline-primary" style="color:white" type="submit" alt="remove" th:text="${ds.doctor}"></button>
             </form></td>
-            <td th:text="${p.typeIllness}">Otto</td>
-            <td th:text="${p.email}">@mdo</td>
-            <td th:text="${p.username}">@mdo</td>
-            <td th:text="${p.password}">@mdo</td>
-            <td th:text="${p.time}">@mdo</td>
+            <td th:text="${ds.diagnosis}">@mdo</td>
+            <td th:text="${ds.patient}">@mdo</td>
+            <td th:text="${ds.localDateTime}">@mdo</td>
           </tr>
 
           </tbody>
@@ -281,142 +280,6 @@
 <!-- Appointment End -->
 
 
-<!-- Team Start -->
-<!--<div class="container-fluid py-5">
-    <div class="container">
-        <div class="text-center mx-auto mb-5" style="max-width: 500px;">
-            <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5">Our Doctors</h5>
-            <h1 class="display-4">Qualified Healthcare Professionals</h1>
-        </div>
-        <div class="owl-carousel team-carousel position-relative">
-            <div class="team-item">
-                <div class="row g-0 bg-light rounded overflow-hidden">
-                    <div class="col-12 col-sm-5 h-100">
-                        <img class="img-fluid h-100" th:src="@{img/team-1.jpg}" style="object-fit: cover;">
-                    </div>
-                    <div class="col-12 col-sm-7 h-100 d-flex flex-column">
-                        <div class="mt-auto p-4">
-                            <h3>Doctor Name</h3>
-                            <h6 class="fw-normal fst-italic text-primary mb-4">Cardiology Specialist</h6>
-                            <p class="m-0">Dolor lorem eos dolor duo eirmod sea. Dolor sit magna rebum clita rebum dolor</p>
-                        </div>
-                        <div class="d-flex mt-auto border-top p-4">
-                            <a class="btn btn-lg btn-primary btn-lg-square rounded-circle me-3" href="#"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-lg btn-primary btn-lg-square rounded-circle me-3" href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-lg btn-primary btn-lg-square rounded-circle" href="#"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="team-item">
-                <div class="row g-0 bg-light rounded overflow-hidden">
-                    <div class="col-12 col-sm-5 h-100">
-                        <img class="img-fluid h-100" th:src="@{img/team-2.jpg}" style="object-fit: cover;">
-                    </div>
-                    <div class="col-12 col-sm-7 h-100 d-flex flex-column">
-                        <div class="mt-auto p-4">
-                            <h3>Doctor Name</h3>
-                            <h6 class="fw-normal fst-italic text-primary mb-4">Cardiology Specialist</h6>
-                            <p class="m-0">Dolor lorem eos dolor duo eirmod sea. Dolor sit magna rebum clita rebum dolor</p>
-                        </div>
-                        <div class="d-flex mt-auto border-top p-4">
-                            <a class="btn btn-lg btn-primary btn-lg-square rounded-circle me-3" href="#"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-lg btn-primary btn-lg-square rounded-circle me-3" href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-lg btn-primary btn-lg-square rounded-circle" href="#"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="team-item">
-                <div class="row g-0 bg-light rounded overflow-hidden">
-                    <div class="col-12 col-sm-5 h-100">
-                        <img class="img-fluid h-100" th:src="@{img/team-3.jpg}" style="object-fit: cover;">
-                    </div>
-                    <div class="col-12 col-sm-7 h-100 d-flex flex-column">
-                        <div class="mt-auto p-4">
-                            <h3>Doctor Name</h3>
-                            <h6 class="fw-normal fst-italic text-primary mb-4">Cardiology Specialist</h6>
-                            <p class="m-0">Dolor lorem eos dolor duo eirmod sea. Dolor sit magna rebum clita rebum dolor</p>
-                        </div>
-                        <div class="d-flex mt-auto border-top p-4">
-                            <a class="btn btn-lg btn-primary btn-lg-square rounded-circle me-3" href="#"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-lg btn-primary btn-lg-square rounded-circle me-3" href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-lg btn-primary btn-lg-square rounded-circle" href="#"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-&lt;!&ndash; Team End &ndash;&gt;
-
-
-&lt;!&ndash; Footer Start &ndash;&gt;
-<div class="container-fluid bg-dark text-light mt-5 py-5">
-    <div class="container py-5">
-        <div class="row g-5">
-            <div class="col-lg-3 col-md-6">
-                <h4 class="d-inline-block text-primary text-uppercase border-bottom border-5 border-secondary mb-4">Get In Touch</h4>
-                <p class="mb-4">No dolore ipsum accusam no lorem. Invidunt sed clita kasd clita et et dolor sed dolor</p>
-                <p class="mb-2"><i class="fa fa-map-marker-alt text-primary me-3"></i>123 Street, New York, USA</p>
-                <p class="mb-2"><i class="fa fa-envelope text-primary me-3"></i>info@example.com</p>
-                <p class="mb-0"><i class="fa fa-phone-alt text-primary me-3"></i>+012 345 67890</p>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <h4 class="d-inline-block text-primary text-uppercase border-bottom border-5 border-secondary mb-4">Quick Links</h4>
-                <div class="d-flex flex-column justify-content-start">
-                    <a class="text-light mb-2" href="#"><i class="fa fa-angle-right me-2"></i>Home</a>
-                    <a class="text-light mb-2" href="#"><i class="fa fa-angle-right me-2"></i>About Us</a>
-                    <a class="text-light mb-2" href="#"><i class="fa fa-angle-right me-2"></i>Our Services</a>
-                    <a class="text-light mb-2" href="#"><i class="fa fa-angle-right me-2"></i>Meet The Team</a>
-                    <a class="text-light mb-2" href="#"><i class="fa fa-angle-right me-2"></i>Latest Blog</a>
-                    <a class="text-light" href="#"><i class="fa fa-angle-right me-2"></i>Contact Us</a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <h4 class="d-inline-block text-primary text-uppercase border-bottom border-5 border-secondary mb-4">Popular Links</h4>
-                <div class="d-flex flex-column justify-content-start">
-                    <a class="text-light mb-2" href="#"><i class="fa fa-angle-right me-2"></i>Home</a>
-                    <a class="text-light mb-2" href="#"><i class="fa fa-angle-right me-2"></i>About Us</a>
-                    <a class="text-light mb-2" href="#"><i class="fa fa-angle-right me-2"></i>Our Services</a>
-                    <a class="text-light mb-2" href="#"><i class="fa fa-angle-right me-2"></i>Meet The Team</a>
-                    <a class="text-light mb-2" href="#"><i class="fa fa-angle-right me-2"></i>Latest Blog</a>
-                    <a class="text-light" href="#"><i class="fa fa-angle-right me-2"></i>Contact Us</a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <h4 class="d-inline-block text-primary text-uppercase border-bottom border-5 border-secondary mb-4">Newsletter</h4>
-                <form action="">
-                    <div class="input-group">
-                        <input type="text" class="form-control p-3 border-0" placeholder="Your Email Address">
-                        <button class="btn btn-primary">Sign Up</button>
-                    </div>
-                </form>
-                <h6 class="text-primary text-uppercase mt-4 mb-3">Follow Us</h6>
-                <div class="d-flex">
-                    <a class="btn btn-lg btn-primary btn-lg-square rounded-circle me-2" href="#"><i class="fab fa-twitter"></i></a>
-                    <a class="btn btn-lg btn-primary btn-lg-square rounded-circle me-2" href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-lg btn-primary btn-lg-square rounded-circle me-2" href="#"><i class="fab fa-linkedin-in"></i></a>
-                    <a class="btn btn-lg btn-primary btn-lg-square rounded-circle" href="#"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="container-fluid bg-dark text-light border-top border-secondary py-4">
-    <div class="container">
-        <div class="row g-5">
-            <div class="col-md-6 text-center text-md-start">
-                <p class="mb-md-0">&copy; <a class="text-primary" href="#">Your Site Name</a>. All Rights Reserved.</p>
-            </div>
-            <div class="col-md-6 text-center text-md-end">
-                <p class="mb-0">Designed by <a class="text-primary" href="https://htmlcodex.com">HTML Codex</a></p>
-            </div>
-        </div>
-    </div>
-</div>-->
-<!-- Footer End -->
 
 
 <!-- Back to Top -->
