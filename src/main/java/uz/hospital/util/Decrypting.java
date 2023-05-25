@@ -21,11 +21,6 @@ public class Decrypting {
     private String password;
     private String email;
     private LocalDateTime time;
-
-
-
-
-
     public static Patient decryptPatient(Encrypt encrypt) {
 
         KriptaAES k = new KriptaAES();

@@ -19,8 +19,6 @@ public class Encrypt {
     private byte[] email;
     private byte[] time;
 
-
-
     public static Encrypt encryptPatient(Patient patient) {
         KriptaAES k = new KriptaAES();
         String secret_key = "secret-code-password";

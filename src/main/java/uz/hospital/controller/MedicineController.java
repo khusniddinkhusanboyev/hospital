@@ -5,7 +5,9 @@ import org.apache.catalina.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import uz.hospital.entity.Diagnosis;
 import uz.hospital.entity.Patient;
+import uz.hospital.service.DiagnosisService;
 import uz.hospital.service.PatientService;
 import uz.hospital.util.Decrypting;
 import uz.hospital.util.Encrypt;
@@ -16,6 +18,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class MedicineController {
 private final PatientService patientService;
+private final DiagnosisService diagnosisService;
 
 
     @GetMapping("/register")
@@ -23,7 +26,6 @@ private final PatientService patientService;
 
             Model model
     ){
-
         model.addAttribute(
                 "patients" ,
                 patientService
@@ -60,6 +62,20 @@ private final PatientService patientService;
         patientService.remove(id);
         return "redirect:/register";
     }
+
+    /**Diagnosis**/
+    @GetMapping("/list-diagnosis")
+    public String diognosisList(Model model){
+        model.addAttribute("new-diagnosis" , new Diagnosis());
+        model.addAttribute("diagnosis" , diagnosisService.diagnosisList());
+        return "diagnosis";
+    }
+
+    @PostMapping("/save-diagnos")
+    public String saveDiagnosis(@ModelAttribute("new-diagnosis") Diagnosis diagnosis){
+        return "redirect:/list-diagnosis";
+    }
+
 
 
 

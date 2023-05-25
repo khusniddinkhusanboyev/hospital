@@ -27,4 +27,5 @@ public class Patient {
     private String password;
     private String email;
     private LocalDateTime time=LocalDateTime.now();
+
 }
