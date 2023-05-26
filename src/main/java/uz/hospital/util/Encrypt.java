@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import uz.hospital.entity.Diagnosis;
 import uz.hospital.entity.Patient;
 
 @Data
@@ -18,6 +19,7 @@ public class Encrypt {
     private byte[] password;
     private byte[] email;
     private byte[] time;
+
 
     public static Encrypt encryptPatient(Patient patient) {
         KriptaAES k = new KriptaAES();
@@ -34,4 +36,7 @@ public class Encrypt {
                 .build();
 
     }
+
+
+
 }

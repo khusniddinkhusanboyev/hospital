@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import uz.hospital.entity.Patient;
 import uz.hospital.response_api.ResponseApi;
 import uz.hospital.service.PatientService;
-
+import uz.hospital.util.Encrypt;
 
 
 import java.util.Optional;
@@ -37,7 +37,7 @@ public class PatientController {
         if (listOfPatients.isEmpty()) {
             return new ResponseEntity<>(new ResponseApi(false, "patients has not been saved!", null), HttpStatus.NOT_FOUND);
         }
-        return ResponseEntity.ok(new ResponseApi(true, " patients are found " , listOfPatients));
+        return ResponseEntity.ok(new ResponseApi(true, " patients are found " , listOfPatients.stream().map(Encrypt::encryptPatient).toList()));
     }
 
 
@@ -49,31 +49,7 @@ public class PatientController {
         }
         Patient patient =patientService.findPatientById(id).get();
 
-        return ResponseEntity.ok(new ResponseApi(true , " " ,null
-                /*Encrypt
-                        .builder()
-                        .id(
-                                rsa
-                                        .encryptMessage(patient.getId().toString().getBytes()))
-                        .fullname(
-                                rsa
-                                        .encryptMessage(patient.getFullname().getBytes()))
-                        .typeIllness(
-                                rsa
-                                        .encryptMessage(patient.getTypeIllness().getBytes()))
-                        .username(
-                                rsa
-                                        .encryptMessage(patient.getUsername().getBytes()))
-                        .password(
-                                rsa
-                                        .encryptMessage(patient.getPassword().getBytes()))
-                        .email(
-                                rsa.
-                                        encryptMessage(patient.getEmail().getBytes()))
-                        .time(
-                                rsa
-                                        .encryptMessage(patient.getTime().toString().getBytes()))
-                        .build()*/));
+        return ResponseEntity.ok(new ResponseApi(true , " " , Encrypt.encryptPatient(patient)));
     }
 
     @PostMapping("/save-patient")
@@ -84,7 +60,7 @@ public class PatientController {
         }else {
 
             patientService.save(patient);
-            return new ResponseEntity<>(new ResponseApi(true, "patient has been successfully saved...", patient), HttpStatus.OK);
+            return new ResponseEntity<>(new ResponseApi(true, "patient has been successfully saved...",Encrypt.encryptPatient(patient)), HttpStatus.OK);
         }
     }
 }

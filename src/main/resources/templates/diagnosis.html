@@ -204,7 +204,6 @@
               </div>
               <div class="col-12 col-sm-6">
                 <select class="form-select bg-light border-0" th:field="*{patient}" name="typeIllness" style="height: 55px;">
-                  <!--<option selected value="Bemor shikoyat">Patient</option>
                   --><option th:each="p : ${pts}" th:text="${p.fullname}" th:value="${p.id}" >Bemor shikoyat</option>
                 </select>
               </div>
@@ -215,32 +214,7 @@
               <div class="col-12">
                 <textarea class="form-control bg-light border-0" th:field="*{diagnosis}" rows="5" placeholder="Diagnosis..."></textarea>
               </div>
-              <!--<div class="col-12 col-sm-6">
-                &lt;!&ndash;<select class="form-select bg-light border-0" name style="height: 55px;">
-                    <option selected>Select Doctor</option>
-                    <option value="1">Doctor 1</option>
-                    <option value="2">Doctor 2</option>
-                    <option value="3">Doctor 3</option>
-                </select>&ndash;&gt;
-                <input required type="text" class="form-control bg-light border-0"  th:field="*{username}" name="username" placeholder="Username..." style="height: 55px;">
 
-              </div>
-              <div class="col-12 col-sm-6">
-                <input  vrequired type="password" th:field="*{password}" name="password" class="form-control bg-light border-0" placeholder="Password..." style="height: 55px;">
-
-                &lt;!&ndash;   <div class="date" id="date" data-target-input="nearest">
-                       <input type="text"
-                           class="form-control bg-light border-0 datetimepicker-input"
-                           placeholder="Date" data-target="#date" data-toggle="datetimepicker" style="height: 55px;">
-                   </div>&ndash;&gt;
-              </div>
-              &lt;!&ndash;<div class="col-12 col-sm-6">
-                  <div class="time" id="time" data-target-input="nearest">
-                     &lt;!&ndash; <input type="text"
-                          class="form-control bg-light border-0 datetimepicker-input"
-                          placeholder="Time" data-target="#time" data-toggle="datetimepicker" style="height: 55px;">&ndash;&gt;
-                  </div>
-              </div>&ndash;&gt;-->
               <div class="col-12">
                 <button class="btn btn-primary w-100 py-3" type="submit">Save</button>
               </div>
@@ -266,7 +240,7 @@
               <button class="btn btn-outline-primary" style="color:white" type="submit" alt="remove" th:text="${ds.doctor}"></button>
             </form></td>
             <td th:text="${ds.diagnosis}">@mdo</td>
-            <td th:text="${ds.patient}">@mdo</td>
+            <td th:text="${ds.patient.fullname}">@mdo</td>
             <td th:text="${ds.localDateTime}">@mdo</td>
           </tr>
 

@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import uz.hospital.entity.Diagnosis;
 import uz.hospital.entity.Patient;
+
 import uz.hospital.service.DiagnosisService;
 import uz.hospital.service.PatientService;
 
@@ -82,11 +83,15 @@ private final DiagnosisService diagnosisService;
         return "redirect:/list-diagnosis";
     }
 
+    /**show - details**/
+
     @GetMapping("/show-details/{id}")
     public String show(@PathVariable Integer id, Model model){
-        model.addAttribute("showDetails" , diagnosisService.findById(id).get());
+        model.addAttribute("showDetails" , patientService.findPatientById(id).get());
         return "show-details";
     }
+
+
 
 
 
