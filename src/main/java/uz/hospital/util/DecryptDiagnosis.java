@@ -34,4 +34,10 @@ public class DecryptDiagnosis{
                 .localDateTime(LocalDateTime.parse(new String(k.decrypt(encryptDiagnosis.getLocalDateTime(), secret_key))))
                 .build();
     }
+
+    public static String decrypt(String encrypted){
+        KriptaAES k = new KriptaAES();
+        String secret_key = "secret-code-password";
+        return new String(k.decrypt(encrypted,secret_key));
+    }
 }
