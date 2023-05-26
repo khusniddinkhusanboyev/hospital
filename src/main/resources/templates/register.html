@@ -41,10 +41,72 @@
 
                 <div class="col-lg-6">
                     <div class="bg-white text-center rounded p-5">
-                        <h1 class="mb-4">Book An Appointment</h1>
+                        <h1 class="mb-4">Ro'yxatga Olish</h1>
                         <form th:action="@{/add-register}" method="get" th:object="${model}">
                             <div class="row g-3">
 
+                                <div class="col-12 col-sm-6">
+                                    <input type="text" required class="form-control bg-light border-0"  th:field="*{fullname}" name="fullName" placeholder="Ismi va Familyasi" style="height: 55px;">
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <select class="form-select bg-light border-0"  th:field="*{typeIllness}" name="typeIllness" style="height: 55px;">
+                                        <option selected value="xxxxx" >Bo'limlar</option>
+                                        <option value="Stomotalogiya">Stomotalogiya</option>
+                                        <option value="Hirurgiya">Hirurgiya</option>
+                                        <option value="Nevrologiya">Nevrologiya</option>
+                                        <option value="Terapiyya">Terapiyya</option>
+                                        <option value="Urologiya">Urologiya</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-12 col-sm-6">
+                                    <input required type="email" th:field="*{email}" name="email" class="form-control bg-light border-0" placeholder="Email pochta..." style="height: 55px;">
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <!--<select class="form-select bg-light border-0" name style="height: 55px;">
+                                        <option selected>Select Doctor</option>
+                                        <option value="1">Doctor 1</option>
+                                        <option value="2">Doctor 2</option>
+                                        <option value="3">Doctor 3</option>
+                                    </select>-->
+                                    <input required type="text" class="form-control bg-light border-0"  th:field="*{username}" name="username" placeholder="Foydalanuvchi nomi..." style="height: 55px;">
+
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <input  vrequired type="password" th:field="*{password}" name="password" class="form-control bg-light border-0" placeholder="Parol..." style="height: 55px;">
+
+                                    <!--   <div class="date" id="date" data-target-input="nearest">
+                                           <input type="text"
+                                               class="form-control bg-light border-0 datetimepicker-input"
+                                               placeholder="Date" data-target="#date" data-toggle="datetimepicker" style="height: 55px;">
+                                       </div>-->
+                                </div>
+                                <!--<div class="col-12 col-sm-6">
+                                    <div class="time" id="time" data-target-input="nearest">
+                                       &lt;!&ndash; <input type="text"
+                                            class="form-control bg-light border-0 datetimepicker-input"
+                                            placeholder="Time" data-target="#time" data-toggle="datetimepicker" style="height: 55px;">&ndash;&gt;
+                                    </div>
+                                </div>-->
+                                <div class="col-12">
+                                    <button class="btn btn-primary w-100 py-3" type="submit">Saqlash</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <!-- About Start -->
+                   <!-- <div class="col-lg-5 mb-5 mb-lg-0" style="min-height: 500px;">-->
+                        <div class="position-relative h-100">
+                            <img class="position-absolute w-100 h-100 rounded" src="https://cdni.iconscout.com/illustration/premium/thumb/dietitian-5303653-4431708.png" style="object-fit: cover;">
+                        </div>
+                    <!--</div>-->
+                    <!-- About End -->
+                   <!-- <div class="bg-white text-center rounded p-5">
+                        <h1 class="mb-4">Reception</h1>
+                        <form th:action="@{/add-register}" method="get" th:object="${model}">
+                            <div class="row g-3">
 
                                 <div class="col-12 col-sm-6">
                                     <input type="text" required class="form-control bg-light border-0"  th:field="*{fullname}" name="fullName" placeholder="Full Name" style="height: 55px;">
@@ -62,37 +124,37 @@
                                     <input required type="email" th:field="*{email}" name="email" class="form-control bg-light border-0" placeholder="Your Email" style="height: 55px;">
                                 </div>
                                 <div class="col-12 col-sm-6">
-                                    <!--<select class="form-select bg-light border-0" name style="height: 55px;">
+                                    &lt;!&ndash;<select class="form-select bg-light border-0" name style="height: 55px;">
                                         <option selected>Select Doctor</option>
                                         <option value="1">Doctor 1</option>
                                         <option value="2">Doctor 2</option>
                                         <option value="3">Doctor 3</option>
-                                    </select>-->
+                                    </select>&ndash;&gt;
                                     <input required type="text" class="form-control bg-light border-0"  th:field="*{username}" name="username" placeholder="Username..." style="height: 55px;">
 
                                 </div>
                                 <div class="col-12 col-sm-6">
                                     <input  vrequired type="password" th:field="*{password}" name="password" class="form-control bg-light border-0" placeholder="Password..." style="height: 55px;">
 
-                                    <!--   <div class="date" id="date" data-target-input="nearest">
+                                    &lt;!&ndash;   <div class="date" id="date" data-target-input="nearest">
                                            <input type="text"
                                                class="form-control bg-light border-0 datetimepicker-input"
                                                placeholder="Date" data-target="#date" data-toggle="datetimepicker" style="height: 55px;">
-                                       </div>-->
+                                       </div>&ndash;&gt;
                                 </div>
-                                <!--<div class="col-12 col-sm-6">
+                                &lt;!&ndash;<div class="col-12 col-sm-6">
                                     <div class="time" id="time" data-target-input="nearest">
                                        &lt;!&ndash; <input type="text"
                                             class="form-control bg-light border-0 datetimepicker-input"
                                             placeholder="Time" data-target="#time" data-toggle="datetimepicker" style="height: 55px;">&ndash;&gt;
                                     </div>
-                                </div>-->
+                                </div>&ndash;&gt;
                                 <div class="col-12">
                                     <button class="btn btn-primary w-100 py-3" type="submit">Save</button>
                                 </div>
                             </div>
                         </form>
-                    </div>
+                    </div>-->
                 </div>
             </div>
             <div class="row ">
@@ -100,12 +162,12 @@
                     <table class="table" style="color:black">
                         <thead>
                         <tr>
-                            <th scope="col">FullName</th>
-                            <th scope="col">Type Illness</th>
+                            <th scope="col">Ismi va Familyasi</th>
+                            <th scope="col">Qaysi Bo'limga</th>
                             <th scope="col">Email</th>
-                            <th scope="col">UserName</th>
+                         <!--   <th scope="col">UserName</th>
                             <th scope="col">Password</th>
-                            <th scope="col">Time</th>
+                         -->   <th scope="col">Ro'yxatga olingan vaqt</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -115,79 +177,18 @@
                             </form></td>
                             <td th:text="${p.typeIllness}">Otto</td>
                             <td th:text="${p.email}">@mdo</td>
-                            <td ><a th:href="@{/show-details/{id}(id=${p.id})}" th:text="${p.username}"></a></td>
+                            <!--<td ><a th:href="@{/show-details/{id}(id=${p.id})}" th:text="${p.username}"></a></td>
                             <td th:text="${p.password}">@mdo</td>
-                            <td th:text="${p.time}">@mdo</td>
+                            --><td th:text="${p.time}">@mdo</td>
                         </tr>
 
                         </tbody>
                     </table>
+                    <a href="/list-diagnosis" class="btn btn-outline-primary" style="color:white">Reception</a>
                 </div>
 
             </div>
-       <!--     <div class="row ">
-                <div class="col-lg-12 mb-5  mt-5 mb-lg-0">
-                    <table class="table" style="color:black">
-                        <thead>
-                        <tr>
-                            <th scope="col">Id</th>
-                            <th scope="col">FullName</th>
-                            <th scope="col">Type Illness</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">UserName</th>
-                            <th scope="col">Password</th>
-                            <th scope="col">Time</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="e:${encrypts}" >
-                            <td th:text="${e.id}"></td>
-                            <td th:text="${e.fullname}"></td>
-                            <td th:text="${e.typeIllness}">Otto</td>
-                            <td th:text="${e.email}">@mdo</td>
-                            <td th:text="${e.username}">@mdo</td>
-                            <td th:text="${e.password}">@mdo</td>
-                            <td th:text="${e.time}">@mdo</td>
-                        </tr>
 
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
-            <div class="row ">
-                <div class="col-lg-12 mb-5  mt-5 mb-lg-0">
-                    <table class="table" style="color:black">
-                        <thead>
-                        <tr>
-                            <th scope="col">Id</th>
-                            <th scope="col">FullName</th>
-                            <th scope="col">Type Illness</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">UserName</th>
-                            <th scope="col">Password</th>
-                            <th scope="col">Time</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="d:${decrypts}">
-                            <td th:text="${d.id}"></td>
-                            <td th:text="${d.fullname}"></td>
-                            <td th:text="${d.typeIllness}">Otto</td>
-                            <td th:text="${d.email}">@mdo</td>
-                            <td th:text="${d.username}">@mdo</td>
-                            <td th:text="${d.password}">@mdo</td>
-                            <td th:text="${d.time}">@mdo</td>
-                        </tr>
-
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
-        </div>
-    </div>-->
-    <!-- Appointment End -->
 
 
 
@@ -206,6 +207,8 @@
 
     <!-- Template Javascript -->
     <script th:src="@{js/main.js}"></script>
+        </div>
+        </div>
 
 </body>
 
