@@ -38,5 +38,10 @@ public class Decrypting {
                 .build();
     }
 
+    public static String decryptString(String data){
+        KriptaAES k = new KriptaAES();
+        String secret_key = "secret-code-password";
+        return new String(k.decrypt(data, secret_key));
+    }
 
 }

@@ -5,8 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import uz.hospital.entity.Diagnosis;
-import uz.hospital.util.EncryptDiagnosis;
-import uz.hospital.util.KriptaAES;
 
 import java.time.LocalDateTime;
 
@@ -14,7 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class DecryptDiagnosis{
+class DecryptDiagnosis{
     /**Diagnosis**/
     private Integer id;
     private String doctor;
