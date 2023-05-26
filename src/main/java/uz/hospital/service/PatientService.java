@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import uz.hospital.entity.Patient;
 import uz.hospital.repository.PatientRepository;
+import uz.hospital.util.Encrypt;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,7 +26,16 @@ public class PatientService {
     }
 
     public Patient save(Patient patient){
-       return patientRepository.save(patient);
+       return patientRepository.save(
+               Patient
+                       .builder()
+                       .id(patient.getId())
+                       .fullname(patient.getFullname())
+                       .typeIllness(patient.getTypeIllness())
+                       .email(patient.getEmail())
+                       .username(new String(Encrypt.encrypt(patient.getUsername())))
+                       .password(new String(Encrypt.encrypt(patient.getPassword())))
+                       .time(patient.getTime()).build());
     }
 
     public void remove(Integer id){

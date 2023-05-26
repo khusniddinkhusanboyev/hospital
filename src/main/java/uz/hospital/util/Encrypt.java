@@ -32,8 +32,16 @@ public class Encrypt {
                 .username(k.encrypt(patient.getUsername() , secret_key))
                 .password(k.encrypt(patient.getPassword(),secret_key))
                 .email(k.encrypt(patient.getEmail() , secret_key))
-                .time(k.encrypt(patient.getTime().toString() , secret_key))
+                /*.time(k.encrypt(patient.getTime().toString() , secret_key))*/
                 .build();
+
+    }
+    public static byte[] encrypt(String message){
+        KriptaAES k = new KriptaAES();
+        String secret_key = "secret-code-password";
+        byte[] encrypted=k.encrypt(message , secret_key);
+        return encrypted;
+
 
     }
 

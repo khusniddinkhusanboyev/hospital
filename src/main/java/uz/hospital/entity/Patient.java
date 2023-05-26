@@ -21,7 +21,9 @@ public class Patient {
     private Integer id;
     private String fullname;
     private String typeIllness;
+    @Column(length = 2000)
     private String username;
+    @Column(length = 2000)
     private String password;
     private String email;
     private LocalDateTime time=LocalDateTime.now();

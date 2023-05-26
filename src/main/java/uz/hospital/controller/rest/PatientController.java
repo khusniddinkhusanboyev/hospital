@@ -19,7 +19,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class PatientController {
     private final PatientService patientService;
-    //RSA rsa=new RSA();
 
     @GetMapping("/patientUserAndPassword")
     public ResponseEntity<?> patienUserAndPassword(@RequestParam("username") String username, @RequestParam("password") String password){
@@ -37,7 +36,7 @@ public class PatientController {
         if (listOfPatients.isEmpty()) {
             return new ResponseEntity<>(new ResponseApi(false, "patients has not been saved!", null), HttpStatus.NOT_FOUND);
         }
-        return ResponseEntity.ok(new ResponseApi(true, " patients are found " , listOfPatients.stream().map(Encrypt::encryptPatient).toList()));
+        return ResponseEntity.ok(new ResponseApi(true, " patients are found " , listOfPatients));
     }
 
 
@@ -49,7 +48,7 @@ public class PatientController {
         }
         Patient patient =patientService.findPatientById(id).get();
 
-        return ResponseEntity.ok(new ResponseApi(true , " " , Encrypt.encryptPatient(patient)));
+        return ResponseEntity.ok(new ResponseApi(true , " " ,patient));
     }
 
     @PostMapping("/save-patient")
@@ -60,7 +59,7 @@ public class PatientController {
         }else {
 
             patientService.save(patient);
-            return new ResponseEntity<>(new ResponseApi(true, "patient has been successfully saved...",Encrypt.encryptPatient(patient)), HttpStatus.OK);
+            return new ResponseEntity<>(new ResponseApi(true, "patient has been successfully saved...",patient), HttpStatus.OK);
         }
     }
 }

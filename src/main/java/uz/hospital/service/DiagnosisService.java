@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import uz.hospital.entity.Diagnosis;
 import uz.hospital.repository.DiagnosisRepository;
+import uz.hospital.util.Encrypt;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,7 +15,15 @@ import java.util.Optional;
 public class DiagnosisService {
     private final DiagnosisRepository diagnosisRepository;
     public Diagnosis save(Diagnosis diagnosis) {
-        return diagnosisRepository.save(diagnosis);
+        return diagnosisRepository.save(
+                Diagnosis
+                        .builder()
+                        .doctor(new String(Encrypt.encrypt(diagnosis.getDoctor())))
+                        .diagnosis(new String(Encrypt.encrypt(diagnosis.getDiagnosis())))
+                        .patient(diagnosis.getPatient())
+                        .localDateTime(diagnosis.getLocalDateTime())
+                        .build()
+        );
     }
 
     public Optional<Diagnosis> findById(Integer id) {

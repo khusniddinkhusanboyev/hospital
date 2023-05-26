@@ -28,7 +28,7 @@ public class EncryptDiagnosis{
                 .doctor(k.encrypt(diagnosis.getDoctor(),secret_key))
                 .diagnosis(k.encrypt(diagnosis.getDiagnosis() , secret_key))
                 .patient(k.encrypt(diagnosis.getPatient().toString() , secret_key))
-                .localDateTime(k.encrypt(diagnosis.getLocalDateTime().toString(),secret_key))
+               /* .localDateTime(k.encrypt(diagnosis.getLocalDateTime().toString(),secret_key))*/
                 .build();
     }
 }

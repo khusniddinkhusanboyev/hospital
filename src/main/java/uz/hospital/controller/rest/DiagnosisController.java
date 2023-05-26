@@ -24,7 +24,7 @@ public class DiagnosisController {
         if (diagnosisList.isEmpty()) {
             return new ResponseEntity<>(new ResponseApi(false, "There is no diagnosis...", diagnosisList), HttpStatus.BAD_REQUEST);
         }
-        return ResponseEntity.ok(new ResponseApi(true, " ", diagnosisList.stream().map(EncryptDiagnosis::encryptDiagnosis).toList()));
+        return ResponseEntity.ok(new ResponseApi(true, " ", diagnosisList));
 
     }
 
@@ -32,7 +32,7 @@ public class DiagnosisController {
     public ResponseEntity<?> diagnosis(@PathVariable Integer id) {
         Optional<Diagnosis> diagnosisOptional = diagnosisService.findById(id);
         if (diagnosisOptional.isPresent()) {
-            return new ResponseEntity<>(new ResponseApi(true, " ",EncryptDiagnosis.encryptDiagnosis(diagnosisOptional.get())), HttpStatus.OK);
+            return new ResponseEntity<>(new ResponseApi(true, " ",diagnosisOptional.get()), HttpStatus.OK);
         }
         return new ResponseEntity<>(new ResponseApi(false, " Diagnosis with id is not found...", null), HttpStatus.BAD_REQUEST);
     }
@@ -40,7 +40,7 @@ public class DiagnosisController {
     public ResponseEntity<?> getPatientDiagnosis(@PathVariable Integer id) {
         List<Diagnosis> patientDiagnosis = diagnosisService.findByPatientId(id);
         if (!patientDiagnosis.isEmpty()) {
-            return new ResponseEntity<>(new ResponseApi(true, " ", patientDiagnosis.stream().map(EncryptDiagnosis::encryptDiagnosis).toList()), HttpStatus.OK);
+            return new ResponseEntity<>(new ResponseApi(true, " ", patientDiagnosis), HttpStatus.OK);
         }
         return new ResponseEntity<>(new ResponseApi(false, " Diagnosis with id is not found...", null), HttpStatus.BAD_REQUEST);
     }
@@ -48,7 +48,7 @@ public class DiagnosisController {
     @PostMapping("/save-diagnosis")
     public ResponseEntity<?> saveDiagnosis(@RequestBody Diagnosis diagnosis) {
         if (diagnosis != null) {
-            return new ResponseEntity<>(new ResponseApi(true, "Diagnosis has been succesfully saved!! ",EncryptDiagnosis.encryptDiagnosis(diagnosisService.save(diagnosis))), HttpStatus.OK);
+            return new ResponseEntity<>(new ResponseApi(true, "Diagnosis has been succesfully saved!! ",diagnosisService.save(diagnosis)), HttpStatus.OK);
         }
         return new ResponseEntity<>(new ResponseApi(false, "diagnosis must not be `null`...", null), HttpStatus.BAD_REQUEST);
     }
