@@ -9,10 +9,9 @@ import uz.hospital.entity.Diagnosis;
 import uz.hospital.entity.Patient;
 import uz.hospital.service.DiagnosisService;
 import uz.hospital.service.PatientService;
-import uz.hospital.util.Decrypting;
-import uz.hospital.util.Encrypt;
 
-import java.util.stream.Collectors;
+
+
 
 @Controller
 @RequiredArgsConstructor
@@ -47,7 +46,7 @@ private final DiagnosisService diagnosisService;
                         .stream()
                         .map(Decrypting::decryptPatient)
                         .toList());
-      */  model.addAttribute("model" , new Patient());
+        */model.addAttribute("model" , new Patient());
         return "register";
     }
 
@@ -56,7 +55,6 @@ private final DiagnosisService diagnosisService;
        patientService.save(patient);
         return "redirect:/register";
     }
-
     @PostMapping("/remove/{id}")
     public String removeDiagnosis(@PathVariable Integer id){
         patientService.remove(id);

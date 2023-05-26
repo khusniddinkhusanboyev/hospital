@@ -9,11 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import uz.hospital.entity.Patient;
 import uz.hospital.response_api.ResponseApi;
 import uz.hospital.service.PatientService;
-import uz.hospital.util.Encrypt;
 
 
-import java.nio.charset.StandardCharsets;
-import java.util.List;
+
 import java.util.Optional;
 
 @RestController
@@ -21,12 +19,13 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class PatientController {
     private final PatientService patientService;
+    //RSA rsa=new RSA();
 
     @GetMapping("/patientUserAndPassword")
     public ResponseEntity<?> patienUserAndPassword(@RequestParam("username") String username, @RequestParam("password") String password){
        var loginData=patientService.patientUsernameAndPassword(username,password);
            if (!loginData.isPresent()){
-               return new ResponseEntity<>(new ResponseApi(false, "Bu shaxs tizimdan o'tmagan", null), HttpStatus.NOT_FOUND);
+               return new ResponseEntity<>(new ResponseApi(false, "Bu shaxs tizimdan mavjud emas", null), HttpStatus.NOT_FOUND);
            }
            return ResponseEntity.ok(new ResponseApi(true, "patients are found" , loginData.get()));
 
@@ -50,8 +49,31 @@ public class PatientController {
         }
         Patient patient =patientService.findPatientById(id).get();
 
-        return ResponseEntity.ok(new ResponseApi(true , " " ,
-                Encrypt.encryptPatient(patient)));
+        return ResponseEntity.ok(new ResponseApi(true , " " ,null
+                /*Encrypt
+                        .builder()
+                        .id(
+                                rsa
+                                        .encryptMessage(patient.getId().toString().getBytes()))
+                        .fullname(
+                                rsa
+                                        .encryptMessage(patient.getFullname().getBytes()))
+                        .typeIllness(
+                                rsa
+                                        .encryptMessage(patient.getTypeIllness().getBytes()))
+                        .username(
+                                rsa
+                                        .encryptMessage(patient.getUsername().getBytes()))
+                        .password(
+                                rsa
+                                        .encryptMessage(patient.getPassword().getBytes()))
+                        .email(
+                                rsa.
+                                        encryptMessage(patient.getEmail().getBytes()))
+                        .time(
+                                rsa
+                                        .encryptMessage(patient.getTime().toString().getBytes()))
+                        .build()*/));
     }
 
     @PostMapping("/save-patient")
