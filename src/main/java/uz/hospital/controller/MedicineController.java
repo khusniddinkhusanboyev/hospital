@@ -10,8 +10,7 @@ import uz.hospital.entity.Patient;
 
 import uz.hospital.service.DiagnosisService;
 import uz.hospital.service.PatientService;
-
-
+import uz.hospital.util.DecryptDiagnosis;
 
 
 @Controller
@@ -28,8 +27,20 @@ private final DiagnosisService diagnosisService;
     ){
         model.addAttribute(
                 "patients" ,
-                patientService
-                        .patients());
+                patientService.patients()
+                        .stream()
+                        .map(p->
+                                p.builder()
+                                        .id(p.getId())
+                                        .fullname(p.getFullname())
+                                        .typeIllness(p.getTypeIllness())
+                                        .username(DecryptDiagnosis.decrypt(p.getUsername()))
+                                        .password(DecryptDiagnosis.decrypt(p.getPassword()))
+                                        .email(p.getEmail())
+                                        .time(p.getTime())
+                                        .build())
+                        .toList()
+        );
        /* model.addAttribute(
                 "encrypts" ,
                 patientService
@@ -67,7 +78,21 @@ private final DiagnosisService diagnosisService;
     public String diognosisList(Model model){
         model.addAttribute("newdiagnosis" , new Diagnosis());
         model.addAttribute("pts" , patientService.patients() );
-        model.addAttribute("diagnosis" , diagnosisService.diagnosisList());
+        model.addAttribute("diagnosis" ,
+                diagnosisService
+                        .diagnosisList()
+                        .stream()
+                        .map(dd->
+                                dd
+                                .builder()
+                                        .doctor(DecryptDiagnosis.decrypt(dd.getDoctor()))
+                                        .diagnosis(DecryptDiagnosis.decrypt(dd.getDiagnosis()))
+                                        .patient(dd.getPatient())
+                                        .localDateTime(dd.getLocalDateTime())
+                                        .build()
+                        )
+                        .toList());
+
         return "diagnosis";
     }
 
