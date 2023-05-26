@@ -1,7 +1,6 @@
 package uz.hospital.response_api;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 
 @Getter

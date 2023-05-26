@@ -32,7 +32,7 @@ public class Encrypt {
                 .username(k.encrypt(patient.getUsername() , secret_key))
                 .password(k.encrypt(patient.getPassword(),secret_key))
                 .email(k.encrypt(patient.getEmail() , secret_key))
-                /*.time(k.encrypt(patient.getTime().toString() , secret_key))*/
+                .time(k.encrypt(patient.getTime().toString() , secret_key))
                 .build();
 
     }
