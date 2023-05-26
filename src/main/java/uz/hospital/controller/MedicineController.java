@@ -84,7 +84,7 @@ private final DiagnosisService diagnosisService;
                         .stream()
                         .map(dd->
                                 dd
-                                .builder()
+                                .builder().id(dd.getId())
                                         .doctor(DecryptDiagnosis.decrypt(dd.getDoctor()))
                                         .diagnosis(DecryptDiagnosis.decrypt(dd.getDiagnosis()))
                                         .patient(dd.getPatient())

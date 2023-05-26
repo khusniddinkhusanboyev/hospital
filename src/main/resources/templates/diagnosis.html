@@ -196,15 +196,15 @@
 
       <div class="col-lg-6">
         <div class="bg-white text-center rounded p-5">
-          <h1 class="mb-4">Diagnosis</h1>
+          <h1 class="mb-4">Tashxis natijasi</h1>
           <form th:action="@{/save-diagnos}" method="post" th:object="${newdiagnosis}">
             <div class="row g-3">
               <div class="col-12 col-sm-6">
-                <input type="text" required class="form-control bg-light border-0"  th:field="*{doctor}" name="fullName" placeholder="Doctor's Fullname" style="height: 55px;">
+                <input type="text" required class="form-control bg-light border-0"  th:field="*{doctor}" name="fullName" placeholder="Doctorning ismi va familyasi" style="height: 55px;">
               </div>
               <div class="col-12 col-sm-6">
-                <select class="form-select bg-light border-0" th:field="*{patient}" name="typeIllness" style="height: 55px;">
-                  --><option th:each="p : ${pts}" th:text="${p.fullname}" th:value="${p.id}" >Bemor shikoyat</option>
+                <select class="form-select bg-light border-0" th:field="*{patient}" name="Bo'lim" style="height: 55px;">
+                  --><option th:each="p : ${pts}" th:text="${p.fullname}" th:value="${p.id}" >Bemor</option>
                 </select>
               </div>
 
@@ -212,14 +212,19 @@
                 <input required type="text" th:field="*{diagnosis}" name="email" class="form-control bg-light border-0" placeholder="Diagnosis..." style="height: 55px;">
               </div>-->
               <div class="col-12">
-                <textarea class="form-control bg-light border-0" th:field="*{diagnosis}" rows="5" placeholder="Diagnosis..."></textarea>
+                <textarea class="form-control bg-light border-0" th:field="*{diagnosis}" rows="5" placeholder="Tashxis..."></textarea>
               </div>
 
               <div class="col-12">
-                <button class="btn btn-primary w-100 py-3" type="submit">Save</button>
+                <button class="btn btn-primary w-100 py-3" type="submit">Saqlash</button>
               </div>
             </div>
           </form>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="position-relative h-100">
+          <img class="position-absolute w-100 h-100 rounded" src="https://cdni.iconscout.com/illustration/premium/thumb/doctor-prescription-5359861-4491914.png" style="object-fit: cover;">
         </div>
       </div>
     </div>
@@ -229,9 +234,9 @@
           <thead>
           <tr>
             <th scope="col">Doctor</th>
-            <th scope="col">Diagnosis</th>
-            <th scope="col">Patient</th>
-            <th scope="col">Time</th>
+            <th scope="col">Tashxis</th>
+            <th scope="col">Bemor</th>
+            <th scope="col">Kiritilgan vaqti</th>
           </tr>
           <tbody>
           </thead>
@@ -239,13 +244,14 @@
             <td ><form th:action="@{/del/{id}(id=${ds.id})}" method="post">
               <button class="btn btn-outline-primary" style="color:white" type="submit" alt="remove" th:text="${ds.doctor}"></button>
             </form></td>
-            <td th:text="${ds.diagnosis}">@mdo</td>
             <td th:text="${ds.patient}">@mdo</td>
+            <td th:text="${ds.diagnosis}">@mdo</td>
             <td th:text="${ds.localDateTime}">@mdo</td>
           </tr>
 
           </tbody>
         </table>
+        <a href="/register" class="btn btn-outline-primary" style="color:white">Ro'yxatga olish</a>
       </div>
 
     </div>
